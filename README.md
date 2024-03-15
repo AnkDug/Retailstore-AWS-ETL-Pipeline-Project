@@ -35,7 +35,7 @@ The table will be grouped by each week, each store, each product to calculate th
 
 ### Please note: Python language & SQL are used to build the pyspark script that utilizes the SparkSQL API for transforming the raw data to meet the business requirement using the Amazon EMR cluster. 
 
-* I created a database with schema in Snowflake using this   **[SQL DDL script](Data_dump_file.txt)**  and then I loaded the **[raw data](https://drive.google.com/drive/folders/1TL3mtDTW4Uv59cyp3C9COgVgGMaBEImB?usp=sharing)** which is another s3 bucket into the Snowflake database by creating integration stage of snowflake and s3 bucket in order to setup the Snowflake OLTP system.
+* I created a database with schema in Snowflake using this   **[SQL DDL script](Data_dump_file.txt)**  and then I loaded the **[raw data](https://drive.google.com/drive/folders/1TL3mtDTW4Uv59cyp3C9COgVgGMaBEImB?usp=sharing)** which is another s3 bucket into the Snowflake database by creating integration stage of snowflake using this **[integration procedure](S3_integration_stage.txt)** and s3 bucket in order to setup the Snowflake OLTP system.
 ![Snowflake_code](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/4c14b063-dbd8-4364-89d0-40b927d84b38)
 
 ![snowflake_code2](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/3b89bb69-7ed0-42e7-9719-6ad1f8f6dc83)
