@@ -40,7 +40,7 @@ The table will be grouped by each week, each store, each product to calculate th
 
 ![snowflake_code2](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/3b89bb69-7ed0-42e7-9719-6ad1f8f6dc83)
 
-* I Wrote a SQL [stored procedure](https://github.com/Joshua-omolewa/end-2-end_data_pipeline_project/blob/main/snowflake_loading_data_to_s3%20-final.sql) that would initiate the extraction of the raw data into the staging s3 bucket (i.e., input s3 bucket) every day at 12:00 MST, which is the off peak period for the retail store. Snowflakes allows the creation of tasks that utilise chron to run any query. I create a task that runs the store procedure to load the data for each day to the input s3 bucket at  12:00 am MST everyday. This process creates a batch load of raw data at the end of each day to be moved into the staging s3 bucket
+* I Wrote a SQL [stored procedure](Data_loading_procedure.txt) that would initiate the extraction of the raw data into the staging s3 bucket (i.e., input s3 bucket) every day at 12:00 MST, which is the off peak period for the retail store. Snowflakes allows the creation of tasks that utilise chron to run any query. I create a task that runs the store procedure to load the data for each day to the input s3 bucket at  12:00 am MST everyday. This process creates a batch load of raw data at the end of each day to be moved into the staging s3 bucket
   * store procedure sql code
 ```
 --Step 1. Create a procedure to load data from Snowflake table to S3 using SQL format.
