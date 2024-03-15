@@ -1,0 +1,33 @@
+--Create a S3 bucket and S3 Stage in Snowflake
+--Create policy and role to allow access to this role 
+
+--Create S3 Integration--
+
+CREATE OR REPLACE STORAGE INTEGRATION raw_data_stage
+TYPE = EXTERNAL_STAGE
+STORAGE_PROVIDER = 'S3'
+ENABLED = TRUE
+STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::506449214205:role/midterm-snowflake-data-dump-role'
+STORAGE_ALLOWED_LOCATIONS = ('s3://midtermdata-bucket');
+
+--describe bucket and copy STORAGE_AWS_ROLE_ARN and STORAGE_AWS_EXTERNAL_ID
+DESC STORAGE INTEGRATION raw_data_stage;
+
+-- attach STORAGE_AWS_ROLE_ARN and STORAGE_AWS_EXTERNAL_ID back to IAM role in AWS
+GRANT CREATE STAGE ON SCHEMA RAW to ROLE ACCOUNTADMIN;
+GRANT USAGE ON INTEGRATION raw_data_stage to ROLE ACCOUNTADMIN;
+
+create or replace file format csv_comma
+type = 'CSV'
+field_delimiter = ','
+skip_header = 1;
+
+-- Create stage for the integration 
+CREATE OR REPLACE STAGE raw_data_stage
+STORAGE_INTEGRATION = raw_data_stage
+URL = 's3://midtermdata-bucket'
+FILE_FORMAT = csv_comma_skip1_format;
+
+DESC STAGE raw_data_stage;
+
+list @raw_data_stage;
