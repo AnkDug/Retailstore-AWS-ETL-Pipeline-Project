@@ -106,5 +106,5 @@ CALL COPY_INTO_S3();
 --Step 3. Activate the task
 ALTER TASK load_data_to_s3 resume;
 ```
-
+* I created an Input S3 (Amazon Simple Storage Service) bucket as a staging area for the raw data coming from the Snowflake. The raw data is extracted from the snowflake database using store procedure. Sample raw data from in the s3 bucket is shown in the image below. ![s3](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/ba212947-8524-4118-bdf3-d36b4000ef4a)
 
