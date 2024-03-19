@@ -108,3 +108,6 @@ ALTER TASK load_data_to_s3 resume;
 ```
 * I created an Input S3 (Amazon Simple Storage Service) bucket as a staging area for the raw data coming from the Snowflake. The raw data is extracted from the snowflake database using store procedure. Sample raw data from in the s3 bucket is shown in the image below. ![s3](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/ba212947-8524-4118-bdf3-d36b4000ef4a)
 
+* Utilized  Cloudwatch to pre-set a rule that automatically triggers the Lambda function at 12:05am MST as raw data extracted daily from snowflake  is expected in the s3 staging area by 12:00 a.m. MST .
+
+* I created the lambda function that cloudwatch triggers at 12:05 a.m. MST that scans the input s3 bucket (staging area) for yesterday's raw data and if found, the lambda function triggers the airflow workflow automatically to start the batch processing. Also, if the data is not yet available, an email is sent to notify the data engineer that the data from the transactional database has not been received. The python code for the lambda function can be found  **[here]()** while the email python code for the lambda function can be found **[here]()** . Please note that Amazon SES is needed to setup the email notification
