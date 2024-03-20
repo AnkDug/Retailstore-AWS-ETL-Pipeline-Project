@@ -110,4 +110,35 @@ ALTER TASK load_data_to_s3 resume;
 
 * Utilized  Cloudwatch to pre-set a rule that automatically triggers the Lambda function at 12:05am MST as raw data extracted daily from snowflake  is expected in the s3 staging area by 12:00 a.m. MST .
 
-* I created the lambda function that cloudwatch triggers at 12:05 a.m. MST that scans the input s3 bucket (staging area) for yesterday's raw data and if found, the lambda function triggers the airflow workflow automatically to start the batch processing. Also, if the data is not yet available, an email is sent to notify the data engineer that the data from the transactional database has not been received. The python code for the lambda function can be found  **[here]()** while the email python code for the lambda function can be found **[here]()** . Please note that Amazon SES is needed to setup the email notification
+* I created the lambda function that cloudwatch triggers at 12:05 a.m. MST that scans the input s3 bucket (staging area) for yesterday's raw data and if found, the lambda function triggers the airflow workflow automatically to start the batch processing. Also, if the data is not yet available, an email is sent to notify the data engineer that the data from the transactional database has not been received. The python code for the lambda function can be found  **[here](lambda_function.py)** while the email python code for the lambda function can be found **[here](send_email.py)** . Please note that Amazon SES is needed to setup the email notification
+![lambda](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/1bb7afe7-ddcb-424e-8ea2-38937836cd9a)
+
+* I created docker containers running Airflow using docker compost  within an EC2 (Amazon Elastic Compute Cloud) instance. Ariflow is used to orchestrate & schedule the the movement of data from S3 to the Amazon EMR cluster for transformation. Airflow submits the spark job to the EMR cluster, and also monitor the spark job transformation step in the EMR cluster and displays if the EMR steps were executed successfully in the DAG Graph view. The airflow python code for the airflow dags can be found **[here](a_midterm_dag.py)**
+![airflow1](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/c7074ed0-a8a8-4144-aa2b-0040635cb63b) ![airflow2](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/0afa2b9c-2c39-4d3c-a2e8-fec267b97362)
+
+* I created an Amazon EMR cluster through the same dag file named a_midterm_dag. The EMR will transform the raw data to meet the business requirement using pyspark code & spark submit configuration received from airflow and load the transformed data in parquet format to the output S3  bucket (ETL process). The pyspark scripts for the project can be found  **[here](etl_pyspark_script.py)**
+![emr](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/672063df-9bda-496d-af9e-48e7dde40b18)
+
+* I created an output S3 bucket in which the transformed data from the EMR Cluster is stored. ![s3_output](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/f4aa293f-38c0-4550-8398-bcf4d36b16bf)
+
+* Utilised Glue to automatically crawl the output S3 bucket to create tables in the Glue catalogue/database that can be queried using Athena by the data analyst.
+* Made use of Athena to query the tables created using Glue. The Data anlyst can interact with the weekly fact table using SQL in order to answer business questions.
+![athena](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/3c0af81d-9967-47fd-9221-da234e3eb56a)
+
+* Finally, I created a docker container that runs superset in an EC2 instance. Superset can be used to create data visualisations  & dashboards  by the Data Analyst. Superset extracts data from Anthena tables, which enables  the Data Analyst to answer any business question.
+
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+
+
+
+
+
+
+
+
+
+
