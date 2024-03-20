@@ -22,8 +22,8 @@ def lambda_handler(event, context):
     default_date_str = time.strftime("%Y-%m-%d")    # return the local time zone when code is executed in YYY-MM-DD format to match csv files 
     os.environ['TZ'] = 'America/Edmonton'           # change local timezone to edmonton time
     time.tzset()                                    # tzset() method resets the time conversion rules used by the library routines to new set timezone.
-    #datestr = time.strftime("%Y-%m-%d")
-    datestr = "2024-03-02"                    
+    datestr = time.strftime("%Y-%m-%d")
+    #datestr = "2024-03-02"                    
     
     
    #the required file list that needs to be processed in s3 bucket (it uses the date the script is run)
