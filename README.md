@@ -125,9 +125,12 @@ ALTER TASK load_data_to_s3 resume;
 * Made use of Athena to query the tables created using Glue. The Data anlyst can interact with the weekly fact table using SQL in order to answer business questions.
 ![athena](https://github.com/AnkDug/Retailstore-AWS-ETL-Pipeline-Project/assets/55326423/3c0af81d-9967-47fd-9221-da234e3eb56a)
 
-* Finally, I created a docker container that runs superset in an EC2 instance. Superset can be used to create data visualisations  & dashboards  by the Data Analyst. Superset extracts data from Anthena tables, which enables  the Data Analyst to answer any business question.
+* Finally, I created a connection between Athena and power BI using Athena ODBC connector. Power BI  can be used to create data visualisations  & dashboards  by the Data Analyst. It extracts data from Anthena tables, which enables  the Data Analyst to answer any business question.
 
-
+## Refrences:
+Snowflake S3 Integration documentation: https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration
+Aiflow Dag Documentation: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html
+Athena Power BI connection: https://www.youtube.com/watch?v=WS3LUbK0ung
 ## Show your support
 
 Give a ⭐️ if this project helped you!
